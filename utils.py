@@ -312,7 +312,7 @@ def check_game_over_2(board):
     ONGOING = 0
     TIE = -1
     :param board: The board to evaluate
-    :return Tuple((1|0|-1)), winner)
+    :return Tuple(1,0,-1), winner)
     """
 
     WON = 1

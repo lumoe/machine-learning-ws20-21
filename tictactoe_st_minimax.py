@@ -1,10 +1,7 @@
 import streamlit as st
 import numpy as np
-from utils import Dojo, Player, check_game_over_2
-
-
-RL_agent = Player('random', 0., 0., 0., 0.)
-RL_agent.sign = -1
+from utils import check_game_over_2
+from minimax import get_best_move
 
 WON = 1
 ONGOING = 0
@@ -25,7 +22,7 @@ def show():
         ⭕❕⁣❌❕⭕  
         ➖➕➖➕➖  
         ❌❕❌❕⭕  
-        ### Interactively play against our RL Agent without training
+        ### Interactively play against our minimax algorithm
         """
     )
     st.write("")
@@ -45,7 +42,9 @@ def show():
     # print(check_game_over_2(st.session_state.board))
 
     if st.session_state.next_player == 'O' and state == ONGOING:
-        st.session_state.board = RL_agent.choose_move(st.session_state.board)
+        move = get_best_move(st.session_state.board)
+        print(move)
+        st.session_state.board[move] = 1
         st.session_state.next_player = 'X'
 
     # check again after agent move 
@@ -53,9 +52,8 @@ def show():
 
     def handle_click(i):
         if st.session_state.board[i] == 0:
-            st.session_state.board[i] = 1
+            st.session_state.board[i] = -1
             st.session_state.next_player = 'O'
-            print(st.session_state.board)
 
     # Write rows first 
     for column in range(0, 3):
@@ -75,9 +73,9 @@ def show():
             )
         
     if winner != None:
-        if winner == 1:
+        if winner == -1:
             st.success(f"You won against our bot :party:")
-        elif winner == -1:
+        elif winner == 1:
             st.error(f"Our bot is better than yours :evil: ")
 
     if state == TIE:
