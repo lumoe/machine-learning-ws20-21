@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
-from utils import Dojo, Player, check_game_over_2
+from utils import Player
+from minimax import check_game_over_2
 
 
 RL_agent = Player('a_optimal_TD', 0., 0., 0., 0.)
