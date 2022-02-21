@@ -25,7 +25,8 @@ def show():
         ⭕❕⁣❌❕⭕  
         ➖➕➖➕➖  
         ❌❕❌❕⭕  
-        ### Interactively play against our RL Agent without training
+        #### Interactively play against our RL Agent 
+        This agent was trained using one-step Temporal Difference learning
         """
     )
     st.write("")
